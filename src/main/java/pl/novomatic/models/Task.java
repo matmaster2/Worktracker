@@ -2,43 +2,31 @@ package pl.novomatic.models;
 
 public class Task implements IModel {
 
-    Task(){};
-
-    Long id;
-    String project;
-    String category;
-    Long parent;
+    private final Long id;
+    private final String project;
+    private final String category;
+    private final Long parent;
+    private Task(Long id, String project, String category, Long parent) {
+        this.id = id;
+        this.project = project;
+        this.category = category;
+        this.parent = parent;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getProject() {
         return project;
     }
 
-    public void setProject(String project) {
-        this.project = project;
-    }
-
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public Long getParent() {
         return parent;
-    }
-
-    public void setParent(Long parent) {
-        this.parent = parent;
     }
 
     @Override
@@ -48,4 +36,40 @@ public class Task implements IModel {
                 "/ncategory:" + getCategory() +
                 "/nparent" + getParent();
     }
+
+    public static class Builder {
+        private Long id;
+        private String project;
+        private String category;
+        private Long parent;
+
+        public Builder() {
+        }
+
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setProject(String project) {
+            this.project = project;
+            return this;
+        }
+
+        public Builder setCategory(String category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder setParent(Long parent) {
+            this.parent = parent;
+            return this;
+        }
+
+        public Task build() {
+            return new Task(id, project, category, parent);
+        }
+    }
+
+
 }
