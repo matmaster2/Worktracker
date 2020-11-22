@@ -1,6 +1,6 @@
 package pl.novomatic.models;
 
-public class WorkLog implements IModel {
+public class WorkLog {
 
     private final String author;
     private final Long timeLogged;

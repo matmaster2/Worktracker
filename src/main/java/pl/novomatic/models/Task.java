@@ -1,6 +1,6 @@
 package pl.novomatic.models;
 
-public class Task implements IModel {
+public class Task {
 
     private final Long id;
     private final String project;

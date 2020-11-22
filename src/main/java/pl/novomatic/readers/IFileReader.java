@@ -1,13 +1,29 @@
 package pl.novomatic.readers;
 
-import pl.novomatic.models.IModel;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-public interface IFileReader {
+public abstract class IFileReader {
 
-    String getFilePath();
+    public abstract String getFilePath();
 
-    ArrayList<IModel> getObjectsFromFile();
+    JSONArray getJSONArrayFromFile() {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(getFilePath());
+        JSONParser jsonParser = new JSONParser();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+            Object obj = jsonParser.parse(reader);
+            JSONArray jsonArray = (JSONArray) obj;
+            return jsonArray;
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        throw new RuntimeException("There is error with reading data from file");
+    }
 
 }
