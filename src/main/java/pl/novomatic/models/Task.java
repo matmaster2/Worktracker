@@ -31,10 +31,10 @@ public class Task implements IModel {
 
     @Override
     public String toString() {
-        return "Task id:" + getId() +
-                "/nproject:" + getProject() +
-                "/ncategory:" + getCategory() +
-                "/nparent" + getParent();
+        return "Task id: " + getId() +
+                "\nproject: " + getProject() +
+                "\ncategory: " + getCategory() +
+                "\nparent: " + getParent();
     }
 
     public static class Builder {

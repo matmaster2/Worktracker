@@ -2,9 +2,12 @@ package pl.novomatic.readers;
 
 import pl.novomatic.models.IModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface IFileReader {
 
-    List<IModel> dataFromFile();
+    String getFilePath();
+
+    ArrayList<IModel> getObjectsFromFile();
+
 }

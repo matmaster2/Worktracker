@@ -2,37 +2,26 @@ package pl.novomatic.readers;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import pl.novomatic.models.IModel;
 import pl.novomatic.models.Task;
 
-import java.io.*;
 import java.util.ArrayList;
 
-public class TaskReader {
+public class TaskReader implements IFileReader {
 
-    ArrayList<Task> tasks = new ArrayList<>();
-    private JSONParser jsonParser = new JSONParser();
+    private ArrayList<IModel> tasks = new ArrayList<>();
+    private String filePath = "tasks.json";
 
-    public static void main(String[] args) {
-        TaskReader bla = new TaskReader();
-        bla.dataFromFile();
+    @Override
+    public String getFilePath() {
+        return filePath;
     }
-    InputStream is = getClass().getClassLoader().getResourceAsStream("tasks.json");
-    public void dataFromFile() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-            Object obj = jsonParser.parse(reader);
-            JSONArray taskList = (JSONArray) obj;
-            taskList.forEach(task -> parseTaskObject((JSONObject) task));
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+    public ArrayList<IModel> getObjectsFromFile() {
+        JSONReader jsonReader = new JSONReader(this);
+        JSONArray jsonArray = jsonReader.getJSONArrayFromFile();
+        jsonArray.forEach(task -> parseTaskObject((JSONObject) task));
+        return tasks;
     }
 
     private void parseTaskObject(JSONObject task) {
