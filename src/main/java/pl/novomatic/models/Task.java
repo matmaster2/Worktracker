@@ -6,6 +6,7 @@ public class Task {
     private final String project;
     private final String category;
     private final Long parent;
+
     private Task(Long id, String project, String category, Long parent) {
         this.id = id;
         this.project = project;

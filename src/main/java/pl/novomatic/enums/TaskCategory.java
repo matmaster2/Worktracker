@@ -9,12 +9,16 @@ public enum TaskCategory {
     private String name;
     private int id;
 
-    TaskCategory(String name, int id){
+    TaskCategory(String name, int id) {
         this.name = name;
         this.id = id;
     }
 
-    public String getName(){return name;}
+    public String getName() {
+        return name;
+    }
 
-    public int getId(){return id;}
+    public int getId() {
+        return id;
+    }
 }

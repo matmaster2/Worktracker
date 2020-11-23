@@ -6,6 +6,7 @@ public class WorkLog {
     private final Long timeLogged;
     private final Long date;
     private final Long taskID;
+
     private WorkLog(String author, Long timeLogged, Long date, Long taskID) {
         this.author = author;
         this.timeLogged = timeLogged;
@@ -29,6 +30,15 @@ public class WorkLog {
     public Long getTaskID() {
         return taskID;
     }
+
+    @Override
+    public String toString() {
+        return "Author: " + getAuthor() +
+                "\ntimeLogged: " + getTimeLogged() +
+                "\ndate: " + getDate() +
+                "\ntaskID: " + getTaskID();
+    }
+
     public static class Builder {
         private String author;
         private Long timeLogged;
@@ -58,18 +68,10 @@ public class WorkLog {
             return this;
         }
 
-        public WorkLog build(){
+        public WorkLog build() {
             return new WorkLog(author, timeLogged, date, taskID);
         }
 
-    }
-
-    @Override
-    public String toString() {
-        return "Author: " + getAuthor() +
-                "\ntimeLogged: " + getTimeLogged() +
-                "\ndate: " + getDate() +
-                "\ntaskID: " + getTaskID();
     }
 
 
